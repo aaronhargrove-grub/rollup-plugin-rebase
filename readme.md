@@ -1,14 +1,8 @@
-# Rollup Rebase <br/>[![Sponsored by][sponsor-img]][sponsor] [![Version][npm-version-img]][npm] [![Downloads][npm-downloads-img]][npm] [![Build Status][github-img]][github]
+# Rollup Rebase
+
+Forked from [rollup-plugin-rebase](https://www.npmjs.com/package/rollup-plugin-rebase). This just adds two small options I needed. Please use the original author's version.
 
 The Rollup Rebase Plugin copies static assets as required from your JavaScript code to the destination folder and adjusts the references in there to point to the new location. It also respects assets referenced from your CSS/SCSS files.
-
-[sponsor]: https://www.sebastian-software.de
-[npm]: https://www.npmjs.com/package/rollup-plugin-rebase
-[sponsor-img]: https://badgen.net/badge/Sponsored%20by/Sebastian%20Software/692446
-[npm-downloads-img]: https://badgen.net/npm/dm/rollup-plugin-rebase
-[npm-version-img]: https://badgen.net/npm/v/rollup-plugin-rebase
-[github]: https://github.com/sebastian-software/rollup-plugin-rebase/actions
-[github-img]: https://badgen.net/github/status/sebastian-software/rollup-plugin-rebase?label=tests&icon=github
 
 ## Features
 
@@ -18,10 +12,6 @@ The Rollup Rebase Plugin copies static assets as required from your JavaScript c
 - Detects and processes assets referenced from both, JavaScript and CSS.
 - Renames all assets based on their hash (XXHash + Base62) so that conflicts are automatically eliminated while producing a flat output structure.
 - Supports _normal_ CSS, but also [SugarSS](https://github.com/postcss/sugarss), [SCSS](https://github.com/postcss/postcss-scss) and [Sass](https://github.com/aleshaoleg/postcss-sass) via the standard PostCSS parser plugins.
-
-## Comparison
-
-The plugin is meant as a tool for preparing a library for being published. In this it differs from plugins like [Rollup URL Plugin](https://github.com/Swatinem/rollup-plugin-url) as it is designed for usage in _libraries_ and not for _applications_. The output of this plugin can be used by tools like Webpacks [File Loader](https://github.com/webpack/file-loader), [URL Loader](https://github.com/webpack/url-loader) or the already mentioned [Rollup URL Plugin](https://github.com/Swatinem/rollup-plugin-url).
 
 ## Installation
 
@@ -69,6 +59,8 @@ config()
 
 ## Copyright
 
-<img src="https://cdn.rawgit.com/sebastian-software/sebastian-software-brand/0d4ec9d6/sebastiansoftware-en.svg" alt="Logo of Sebastian Software GmbH, Mainz, Germany" width="460" height="160"/>
+Forked from:
+
+[rollup-plugin-rebase](https://www.npmjs.com/package/rollup-plugin-rebase)
 
 Copyright 2016-2022<br/>[Sebastian Software GmbH](http://www.sebastian-software.de)

@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebastian-software/rollup-plugin-rebase.git"
+    "url": "git+https://github.com/aaronhargrove-grub/rollup-plugin-rebase.git"
   },
   "dependencies": {
     "@rollup/pluginutils": "^4.2.0",
