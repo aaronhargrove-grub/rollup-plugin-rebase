@@ -61,7 +61,9 @@ export default function rebase(options = {}) {
     exclude,
     verbose = false,
     keepName = false,
-    assetFolder = ""
+    assetFolder = "",
+    skipHash = false,
+    includeScripts = false,
   } = options
 
   const filter = createFilter(include, exclude)
@@ -113,7 +115,7 @@ export default function rebase(options = {}) {
       // cause all assets typically have one. By returning `null` we delegate
       // the resolver to other plugins.
       let fileExt = path.extname(importee)
-      if (fileExt === "" || scriptExtensions.test(fileExt)) {
+      if (fileExt === "" || (!includeScripts && scriptExtensions.test(fileExt))) {
         return null
       }
 
@@ -144,7 +146,7 @@ export default function rebase(options = {}) {
       const fileName = path.basename(importee, fileExt)
       const fileHash = await getHash(fileSource)
       const fileTarget = keepName
-        ? `${fileName}~${fileHash}${fileExt}`
+        ? `${fileName}${skipHash ? '' : `~${fileHash}`}${fileExt}`
         : `${fileHash}${fileExt}`
 
       // Registering for our copying job when the bundle is created (kind of a job queue)

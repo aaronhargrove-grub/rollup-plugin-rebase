@@ -64,6 +64,8 @@ config()
 - `verbose`: If `true`, increases log level
 - `include`: Standard include option for rollup plugins.
 - `exclude`: Standard exclude option for rollup plugins.
+- `skipHash`: Skips the step that adds a hash to the file names. Requires `keepName`.
+- `includeScripts`: Enabled script files to be rebased, as they are ignored by default.
 
 ## Copyright
 
