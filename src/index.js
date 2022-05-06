@@ -64,6 +64,8 @@ export default function rebase(options = {}) {
     assetFolder = "",
     skipHash = false,
     includeScripts = false,
+    flatten = true,
+    buildFolderStructureFrom
   } = options
 
   const filter = createFilter(include, exclude)
@@ -149,13 +151,42 @@ export default function rebase(options = {}) {
         ? `${fileName}${skipHash ? '' : `~${fileHash}`}${fileExt}`
         : `${fileHash}${fileExt}`
 
+      const { dir } = path.parse(fileSource);
+      let destinationFolder;
+      if (flatten || (!flatten && !dir)) {
+        destinationFolder = assetFolder
+      } else {
+        let pathToFile = dir.split(process.cwd())[1]
+
+        // If we're building the folder structure from a single folder
+        if (buildFolderStructureFrom) {
+          // Append and prepend separators if not already there 
+          let folderPathToRemove = buildFolderStructureFrom;
+          if (folderPathToRemove.substring(-1) !== path.sep) {
+            folderPathToRemove = folderPathToRemove + path.sep
+          }
+          if (folderPathToRemove.charAt(0) !== path.sep) {
+            folderPathToRemove = path.sep + folderPathToRemove;
+          }
+
+          // Check if the folder(s) we want to remove are in the path. If no, do nothing.
+          // If yes, remove folders from string.
+          let folderPathIndex = pathToFile.indexOf(folderPathToRemove);
+          if (folderPathIndex > -1) {
+            pathToFile = pathToFile.substring(folderPathIndex + folderPathToRemove.length)
+          }
+        }
+
+        destinationFolder = path__default.join(assetFolder, pathToFile);
+      }
+
       // Registering for our copying job when the bundle is created (kind of a job queue)
       // and respect any sub folder given by the configuration options.
-      files[fileSource] = path.join(assetFolder, fileTarget)
+      files[fileSource] = path.join(destinationFolder, fileTarget)
 
       // Replacing slashes for Windows, as we need to use POSIX style to be compat
       // to Rollup imports / NodeJS resolve implementation.
-      const assetId = path.join(root, assetFolder, fileTarget).replace(/\\/g, "/")
+      const assetId = path.join(root, destinationFolder, fileTarget).replace(/\\/g, "/")
 
       // console.log("Importer:", importer)
       // console.log("Asset-ID:", assetId)
