@@ -177,7 +177,7 @@ export default function rebase(options = {}) {
           }
         }
 
-        destinationFolder = path__default.join(assetFolder, pathToFile);
+        destinationFolder = path.join(assetFolder, pathToFile);
       }
 
       // Registering for our copying job when the bundle is created (kind of a job queue)
